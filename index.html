@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Communication Systems — Formula Sheet</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #1a1a2e; }
+
+  .cover {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    color: white; text-align: center; padding: 60px 40px 50px;
+  }
+  .cover h1 { font-size: 2.8em; letter-spacing: 3px; margin-bottom: 12px; }
+  .cover p  { font-size: 1.15em; opacity: 0.75; }
+
+  .toc {
+    background: #1a1a2e; color: #cdd6f4;
+    padding: 28px 40px; display: flex; flex-wrap: wrap; gap: 6px 30px;
+  }
+  .toc a { color: #89b4fa; text-decoration: none; font-size: 0.9em; }
+  .toc a:hover { text-decoration: underline; }
+  .toc-title { width: 100%; font-weight: bold; color: #cba6f7; margin-bottom: 8px; font-size: 1em; letter-spacing: 1px; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 30px 20px; }
+
+  .section {
+    background: white; border-radius: 12px; margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08); overflow: hidden;
+  }
+  .section-header {
+    background: linear-gradient(90deg, #1a1a2e, #0f3460);
+    color: white; padding: 16px 24px; display: flex; align-items: center; gap: 14px;
+  }
+  .section-num {
+    background: #cba6f7; color: #1a1a2e; border-radius: 50%;
+    width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 1em; flex-shrink: 0;
+  }
+  .section-header h2 { font-size: 1.3em; letter-spacing: 1px; }
+
+  .section-body { padding: 20px 24px; }
+
+  .subsection { margin-bottom: 20px; }
+  .subsection h3 {
+    font-size: 1em; color: #0f3460; font-weight: 700;
+    border-left: 4px solid #89b4fa; padding-left: 10px;
+    margin-bottom: 12px; margin-top: 18px; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  .eq-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 10px; }
+
+  .eq-card {
+    background: #f8f9ff; border: 1px solid #e0e6ff;
+    border-radius: 8px; padding: 12px 16px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .eq-card.highlight { background: #fff8f0; border-color: #ffb347; }
+  .eq-card.important { background: #f0fff4; border-color: #52b788; }
+  .eq-card.warning  { background: #fff0f0; border-color: #e57373; }
+
+  .eq-label {
+    font-size: 0.78em; font-weight: 700; color: #7c3aed;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .eq-math { font-size: 1.05em; }
+
+  .note-box {
+    background: #fffde7; border-left: 4px solid #f9a825;
+    border-radius: 0 6px 6px 0; padding: 10px 14px; margin-top: 10px;
+    font-size: 0.88em; color: #5f4500; line-height: 1.6;
+  }
+  .note-box b { color: #b45309; }
+
+  .table-wrap { overflow-x: auto; margin-top: 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+  th { background: #1a1a2e; color: white; padding: 10px 14px; text-align: left; }
+  td { padding: 9px 14px; border-bottom: 1px solid #e8eaf0; }
+  tr:nth-child(even) td { background: #f5f7ff; }
+  tr:last-child td { border-bottom: none; }
+
+  .badge {
+    display: inline-block; background: #0f3460; color: white;
+    border-radius: 4px; padding: 2px 8px; font-size: 0.75em; font-weight: 700;
+    margin-left: 8px; vertical-align: middle;
+  }
+  .badge.green { background: #2d6a4f; }
+  .badge.red { background: #b91c1c; }
+  .badge.purple { background: #6d28d9; }
+
+  footer {
+    text-align: center; color: #888; font-size: 0.85em;
+    padding: 30px; margin-top: 10px;
+  }
+
+  @media print {
+    body { background: white; }
+    .section { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+    .cover { background: #1a1a2e !important; -webkit-print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <h1>📡 COMMUNICATION SYSTEMS</h1>
+  <p>Complete Equations &amp; Formula Reference — Baraa said | 2025–2026</p>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">📋 CONTENTS</div>
+  <a href="#s1">1. Modulation Basics</a>
+  <a href="#s2">2. Normal AM</a>
+  <a href="#s3">3. DSB-SC</a>
+  <a href="#s4">4. SSB-SC</a>
+  <a href="#s5">5. Comparison Table</a>
+  <a href="#s6">6. FM &amp; PM</a>
+  <a href="#s7">7. Sampling &amp; PAM</a>
+  <a href="#s8">8. PCM / ADC</a>
+  <a href="#s9">9. Digital Modulation</a>
+  <a href="#s10">10. Line Coding</a>
+  <a href="#s11">11. Key Identities</a>
+</div>
+
+<div class="container">
+
+<!-- ===== 1. MODULATION BASICS ===== -->
+<div class="section" id="s1">
+  <div class="section-header"><div class="section-num">1</div><h2>MODULATION BASICS</h2></div>
+  <div class="section-body">
+
+    <div class="subsection">
+      <h3>Carrier Signal</h3>
+      <div class="eq-grid">
+        <div class="eq-card highlight">
+          <div class="eq-label">Carrier</div>
+          <div class="eq-math">\( c(t) = A_c \cos\!\left(2\pi f_c t + \theta\right) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Instantaneous Frequency</div>
+          <div class="eq-math">\( f_i(t) = \dfrac{1}{2\pi}\dfrac{d\phi(t)}{dt} \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Instantaneous Phase</div>
+          <div class="eq-math">\( \phi(t) = 2\pi f_c t + \theta \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Speed of Light / Wavelength</div>
+          <div class="eq-math">\( \lambda f = c = 3\times10^8 \text{ m/s} \quad\Rightarrow\quad \lambda = \dfrac{c}{f} \)</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== 2. NORMAL AM ===== -->
+<div class="section" id="s2">
+  <div class="section-header"><div class="section-num">2</div><h2>NORMAL AM — DSB-FC</h2></div>
+  <div class="section-body">
+
+    <div class="subsection">
+      <h3>Modulated Signal</h3>
+      <div class="eq-grid">
+        <div class="eq-card highlight">
+          <div class="eq-label">General AM Signal</div>
+          <div class="eq-math">\( s_{AM}(t) = A_c\!\left[1 + k_a m(t)\right]\cos(2\pi f_c t) \)</div>
+        </div>
+        <div class="eq-card highlight">
+          <div class="eq-label">Single Tone  \(m(t)=A_m\cos(2\pi f_m t)\)</div>
+          <div class="eq-math">\( s_{AM}(t) = A_c\!\left[1 + M\cos(2\pi f_m t)\right]\cos(2\pi f_c t) \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Modulation Index</h3>
+      <div class="eq-grid">
+        <div class="eq-card important">
+          <div class="eq-label">Definition</div>
+          <div class="eq-math">\( M = k_a A_m \)</div>
+        </div>
+        <div class="eq-card important">
+          <div class="eq-label">From Graph</div>
+          <div class="eq-math">\( M = \left|\dfrac{A_{max} - A_{min}}{A_{max} + A_{min}}\right| \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Maximum Envelope</div>
+          <div class="eq-math">\( A_{max} = A_c(1+M) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Minimum Envelope</div>
+          <div class="eq-math">\( A_{min} = A_c(1-M) \)</div>
+        </div>
+      </div>
+      <div class="note-box">
+        <b>M &lt; 1</b> → Under-modulation (can recover) &nbsp;|&nbsp;
+        <b>M = 1</b> → Normal modulation &nbsp;|&nbsp;
+        <b>M &gt; 1</b> → Over-modulation ❌ (cannot recover) &nbsp;|&nbsp;
+        <b>M = 0</b> → \(s_{AM}(t)=c(t)\), no message
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Power</h3>
+      <div class="eq-grid">
+        <div class="eq-card">
+          <div class="eq-label">Carrier Power</div>
+          <div class="eq-math">\( P_c = \dfrac{A_c^2}{2} \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">USB / LSB Power</div>
+          <div class="eq-math">\( P_{USB} = P_{LSB} = \dfrac{\left(\dfrac{A_c M}{2}\right)^2}{2} = \dfrac{A_c^2 M^2}{8} \)</div>
+        </div>
+        <div class="eq-card highlight">
+          <div class="eq-label">Total Power</div>
+          <div class="eq-math">\( P_{total} = \dfrac{A_c^2}{2}\!\left(1 + \dfrac{M^2}{2}\right) \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Efficiency</h3>
+      <div class="eq-grid">
+        <div class="eq-card important">
+          <div class="eq-label">Single Tone</div>
+          <div class="eq-math">\( \eta\% = \dfrac{M^2}{M^2 + 2} \times 100\% \)</div>
+        </div>
+        <div class="eq-card important">
+          <div class="eq-label">Multi-Tone</div>
+          <div class="eq-math">\( \eta\% = \dfrac{M_1^2 + M_2^2 + \cdots}{2 + M_1^2 + M_2^2 + \cdots} \times 100\% \)</div>
+        </div>
+      </div>
+      <div class="note-box"><b>Max efficiency</b> at \(M=1\): \(\eta_{max} = \frac{1}{3} = 33.3\%\)</div>
+    </div>
+
+    <div class="subsection">
+      <h3>Bandwidth</h3>
+      <div class="eq-grid">
+        <div class="eq-card highlight">
+          <div class="eq-label">Bandwidth</div>
+          <div class="eq-math">\( BW = 2f_{max,\,message} \)</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== 3. DSB-SC ===== -->
+<div class="section" id="s3">
+  <div class="section-header"><div class="section-num">3</div><h2>DSB-SC — Double Sideband Suppressed Carrier</h2></div>
+  <div class="section-body">
+
+    <div class="subsection">
+      <h3>Signal</h3>
+      <div class="eq-grid">
+        <div class="eq-card highlight">
+          <div class="eq-label">DSB-SC Signal</div>
+          <div class="eq-math">\( s_{DSB\text{-}SC}(t) = m(t)\cdot c(t) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Single Tone Expanded</div>
+          <div class="eq-math">\( s(t) = \dfrac{A_m A_c}{2}\!\left[\cos2\pi(f_c+f_m)t + \cos2\pi(f_c-f_m)t\right] \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">USB / LSB Power</div>
+          <div class="eq-math">\( P_{USB} = P_{LSB} = \dfrac{A_m^2 A_c^2}{8} \)</div>
+        </div>
+        <div class="eq-card important">
+          <div class="eq-label">Efficiency &amp; BW</div>
+          <div class="eq-math">\( \eta = 100\%\qquad BW = 2f_m \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Coherent Demodulation</h3>
+      <div class="eq-grid">
+        <div class="eq-card">
+          <div class="eq-label">Multiply then Filter</div>
+          <div class="eq-math">\( v(t) = s_{DSB}(t)\cdot c'(t)\;\xrightarrow{\text{LPF}}\; y(t)\propto m(t) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">LPF Cutoff Condition</div>
+          <div class="eq-math">\( f_m \;\leq\; f_{3dB} \;<\; 2f_c - f_m \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">With Freq. Diff \(\Delta f\)</div>
+          <div class="eq-math">\( y(t) = \dfrac{A_m A_c A_c'}{4}\!\left[\cos2\pi(f_m+\Delta f)t + \cos2\pi(f_m-\Delta f)t\right] \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">With Phase Diff \(\Delta\theta\)</div>
+          <div class="eq-math">\( y(t) = \dfrac{A_c A_c'}{2}\,m(t)\cos(\Delta\theta) \)</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== 4. SSB-SC ===== -->
+<div class="section" id="s4">
+  <div class="section-header"><div class="section-num">4</div><h2>SSB-SC — Single Sideband Suppressed Carrier</h2></div>
+  <div class="section-body">
+
+    <div class="subsection">
+      <h3>Phase Shift Method (Generation)</h3>
+      <div class="eq-grid">
+        <div class="eq-card highlight">
+          <div class="eq-label">USB-SC</div>
+          <div class="eq-math">\( s_{USB}(t) = m(t)\,A_c\cos(2\pi f_c t) - \hat{m}(t)\,A_c\sin(2\pi f_c t) \)</div>
+        </div>
+        <div class="eq-card highlight">
+          <div class="eq-label">LSB-SC</div>
+          <div class="eq-math">\( s_{LSB}(t) = m(t)\,A_c\cos(2\pi f_c t) + \hat{m}(t)\,A_c\sin(2\pi f_c t) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Single Tone — USB</div>
+          <div class="eq-math">\( s_{USB}(t) = A_m A_c\cos2\pi(f_c+f_m)t \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Single Tone — LSB</div>
+          <div class="eq-math">\( s_{LSB}(t) = A_m A_c\cos2\pi(f_c-f_m)t \)</div>
+        </div>
+      </div>
+      <div class="note-box">\(\hat{m}(t)\) = Hilbert transform of \(m(t)\) = 90° phase shift.<br>
+        For \(m(t)=A_m\cos(2\pi f_m t)\)&ensp;→&ensp;\(\hat{m}(t)=A_m\sin(2\pi f_m t)\)</div>
+    </div>
+
+    <div class="subsection">
+      <h3>Power &amp; Bandwidth</h3>
+      <div class="eq-grid">
+        <div class="eq-card important">
+          <div class="eq-label">Efficiency</div>
+          <div class="eq-math">\( \eta = 100\% \)</div>
+        </div>
+        <div class="eq-card important">
+          <div class="eq-label">Bandwidth</div>
+          <div class="eq-math">\( BW = f_{max,\,message} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Non-Coherent with Phase Diff</h3>
+      <div class="eq-grid">
+        <div class="eq-card warning">
+          <div class="eq-label">Output (USB-SC example)</div>
+          <div class="eq-math">\( y(t) = \dfrac{A_c'}{2}\!\left[m(t)\cos(\Delta\theta) \mp \hat{m}(t)\sin(\Delta\theta)\right] \)</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== 5. COMPARISON ===== -->
+<div class="section" id="s5">
+  <div class="section-header"><div class="section-num">5</div><h2>AM MODULATION COMPARISON</h2></div>
+  <div class="section-body">
+    <div class="table-wrap">
+      <table>
+        <tr><th>Type</th><th>Efficiency \(\eta\)</th><th>Bandwidth</th><th>Carrier</th></tr>
+        <tr>
+          <td><b>Normal AM (DSB-FC)</b></td>
+          <td>\(\dfrac{M^2}{M^2+2}\times100\%\quad\leq 33.3\%\)</td>
+          <td>\(2f_{max,m}\)</td>
+          <td>Present</td>
+        </tr>
+        <tr>
+          <td><b>DSB-SC</b></td>
+          <td>\(100\%\)</td>
+          <td>\(2f_{max,m}\)</td>
+          <td>Suppressed</td>
+        </tr>
+        <tr>
+          <td><b>USB-SC (SSB)</b></td>
+          <td>\(100\%\)</td>
+          <td>\(f_{max,m}\)</td>
+          <td>Suppressed</td>
+        </tr>
+        <tr>
+          <td><b>LSB-SC (SSB)</b></td>
+          <td>\(100\%\)</td>
+          <td>\(f_{max,m}\)</td>
+          <td>Suppressed</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 6. ANGLE MOD ===== -->
+<div class="section" id="s6">
+  <div class="section-header"><div class="section-num">6</div><h2>ANGLE MODULATION — FM &amp; PM</h2></div>
+  <div class="section-body">
+
+    <div class="subsection">
+      <h3>Frequency Modulation (FM)</h3>
+      <div class="eq-grid">
+        <div class="eq-card highlight">
+          <div class="eq-label">Instantaneous Frequency</div>
+          <div class="eq-math">\( f_i(t) = f_c + k_f m(t) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Frequency Deviation</div>
+          <div class="eq-math">\( \Delta f(t) = f_i(t) - f_c = k_f m(t) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Peak Frequency Deviation</div>
+          <div class="eq-math">\( \Delta f_{max} = \left|k_f m(t)\right|_{max} \)</div>
+        </div>
+        <div class="eq-card highlight">
+          <div class="eq-label">FM Signal</div>
+          <div class="eq-math">\( s_{FM}(t) = A_c\cos\!\left(2\pi f_c t + 2\pi k_f\int_0^t m(\tau)\,d\tau\right) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Single Tone Form</div>
+          <div class="eq-math">\( s_{FM}(t) = A_c\cos\!\left(2\pi f_c t + \beta\sin(2\pi f_m t)\right) \)</div>
+        </div>
+        <div class="eq-card important">
+          <div class="eq-label">Modulation Index \(\beta\)</div>
+          <div class="eq-math">\( \beta = \dfrac{\Delta f_{max}}{f_m} = \dfrac{k_f A_m}{f_m} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Phase Modulation (PM)</h3>
+      <div class="eq-grid">
+        <div class="eq-card highlight">
+          <div class="eq-label">PM Signal</div>
+          <div class="eq-math">\( s_{PM}(t) = A_c\cos\!\left(2\pi f_c t + k_p m(t)\right) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Instantaneous Freq (PM)</div>
+          <div class="eq-math">\( f_i(t) = f_c + \dfrac{k_p}{2\pi}\dfrac{dm(t)}{dt} \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Peak Freq Deviation (PM)</div>
+          <div class="eq-math">\( \Delta f_{max} = \dfrac{k_p}{2\pi}\left|\dfrac{dm(t)}{dt}\right|_{max} \)</div>
+        </div>
+      </div>
+      <div class="note-box">
+        <b>FM:</b> \(f_i\) depends on <b>amplitude</b> of \(m(t)\)&emsp;|&emsp;
+        <b>PM:</b> \(f_i\) depends on <b>slope</b> (derivative) of \(m(t)\)
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Power (FM &amp; PM)</h3>
+      <div class="eq-grid">
+        <div class="eq-card important">
+          <div class="eq-label">Total Power (always constant)</div>
+          <div class="eq-math">\( P_{total} = \dfrac{A_c^2}{2} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Wideband FM — Bessel Series</h3>
+      <div class="eq-grid">
+        <div class="eq-card highlight">
+          <div class="eq-label">FM Signal (Bessel Expansion)</div>
+          <div class="eq-math">\( s_{FM}(t) = A_c\sum_{n=-\infty}^{\infty} J_n(\beta)\cos\!\left(2\pi(f_c+nf_m)t\right) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Bessel Symmetry</div>
+          <div class="eq-math">\( J_{-n}(x) = (-1)^n J_n(x) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Power Property</div>
+          <div class="eq-math">\( \sum_{n=-\infty}^{\infty} \bigl[J_n(x)\bigr]^2 = 1\quad\forall\, x \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Total Power (Bessel form)</div>
+          <div class="eq-math">\( P_{total} = \dfrac{A_c^2}{2}\sum_{n=-\infty}^{\infty}J_n^2(\beta) = \dfrac{A_c^2}{2} \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Carrier Component</div>
+          <div class="eq-math">\( P_{carrier} = \dfrac{A_c^2}{2}J_0^2(\beta) \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Bandwidth</h3>
+      <div class="eq-grid">
+        <div class="eq-card important">
+          <div class="eq-label">99% Power BW</div>
+          <div class="eq-math">\( BW = 2n\cdot f_m \quad\text{(find smallest } n \text{ for 99\% power)} \)</div>
+        </div>
+        <div class="eq-card important">
+          <div class="eq-label">Carson's Rule (FM &amp; PM)</div>
+          <div class="eq-math">\( BW \approx 2(\beta+1)f_m = 2\Delta f_{max} + 2\,BW_{message} \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">NBFM (\(\beta\ll 1\))</div>
+          <div class="eq-math">\( BW = 2f_m \quad\text{(same as AM)} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Frequency Multiplier (Indirect FM Generation)</h3>
+      <div class="eq-grid">
+        <div class="eq-card">
+          <div class="eq-label">After Multiplier ×n</div>
+          <div class="eq-math">\( f_c^{new} = n\cdot f_c' \qquad \beta^{new} = n\cdot\beta' \)</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== 7. SAMPLING ===== -->
+<div class="section" id="s7">
+  <div class="section-header"><div class="section-num">7</div><h2>SAMPLING &amp; PAM</h2></div>
+  <div class="section-body">
+
+    <div class="subsection">
+      <h3>Nyquist Theorem</h3>
+      <div class="eq-grid">
+        <div class="eq-card highlight">
+          <div class="eq-label">Nyquist Rate</div>
+          <div class="eq-math">\( f_s \;\geq\; 2\,f_{max,\,message} \)</div>
+        </div>
+        <div class="eq-card warning">
+          <div class="eq-label">Aliasing (if violated)</div>
+          <div class="eq-math">\( f_s < 2f_h \;\Rightarrow\; \text{Aliasing — cannot recover signal} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Sampled Signal Spectrum</h3>
+      <div class="eq-grid">
+        <div class="eq-card highlight">
+          <div class="eq-label">General Sampler</div>
+          <div class="eq-math">\( M_s(f) = \sum_{n=-\infty}^{\infty} f_s\,P(nf_s)\cdot M(f-nf_s) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Ideal Sampler \([P_n = f_s]\)</div>
+          <div class="eq-math">\( M_s(f) = f_s\sum_{n=-\infty}^{\infty} M(f - nf_s) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Duty Cycle</div>
+          <div class="eq-math">\( D = \dfrac{\tau}{T_s}\times 100\% = \tau\cdot f_s\times 100\% \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Reconstruction LPF</div>
+          <div class="eq-math">\( H(f)=\begin{cases}\dfrac{1}{P_0} & |f|\leq\dfrac{f_s}{2}\\[4pt]0 & \text{o.w.}\end{cases} \)</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== 8. PCM ===== -->
+<div class="section" id="s8">
+  <div class="section-header"><div class="section-num">8</div><h2>PCM — PULSE CODE MODULATION / ADC</h2></div>
+  <div class="section-body">
+
+    <div class="subsection">
+      <h3>Uniform Quantizer</h3>
+      <div class="eq-grid">
+        <div class="eq-card">
+          <div class="eq-label">Number of Levels</div>
+          <div class="eq-math">\( M = 2^n \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Step Size</div>
+          <div class="eq-math">\( \Delta = \dfrac{A_{max}-A_{min}}{M} = \dfrac{A_{max}-A_{min}}{2^n} \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Quantization Error</div>
+          <div class="eq-math">\( E = |x - \bar{x}| \;\in\; \left[-\dfrac{\Delta}{2},\,\dfrac{\Delta}{2}\right] \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Noise Power</div>
+          <div class="eq-math">\( P_e = \dfrac{\Delta^2}{12} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>SQNR — Signal-to-Quantization-Noise Ratio</h3>
+      <div class="eq-grid">
+        <div class="eq-card highlight">
+          <div class="eq-label">SQNR (sinusoidal input)</div>
+          <div class="eq-math">\( SQNR = \dfrac{A^2/2}{\Delta^2/12} = \dfrac{3}{2}M^2 = \dfrac{3}{2}\cdot 2^{2n} \)</div>
+        </div>
+        <div class="eq-card highlight">
+          <div class="eq-label">SQNR in dB</div>
+          <div class="eq-math">\( SQNR_{dB} = 6.02\,n + 1.76\;\text{dB} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Bit Rate</h3>
+      <div class="eq-grid">
+        <div class="eq-card important">
+          <div class="eq-label">Bit Rate</div>
+          <div class="eq-math">\( R_b = n \cdot f_s \quad\text{[bits/sec]} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Delta Modulation — Slope Overload Condition</h3>
+      <div class="eq-grid">
+        <div class="eq-card warning">
+          <div class="eq-label">To Avoid Slope Overload</div>
+          <div class="eq-math">\( \dfrac{\Delta}{T_s} \;\geq\; \left|\dfrac{dm(t)}{dt}\right|_{max} \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Single Tone \(m(t)=A_m\cos(2\pi f_m t)\)</div>
+          <div class="eq-math">\( \Delta \;\geq\; 2\pi f_m A_m T_s = \dfrac{2\pi f_m A_m}{f_s} \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>M-law (Non-Uniform Quantization)</h3>
+      <div class="eq-grid">
+        <div class="eq-card">
+          <div class="eq-label">Compressor Output</div>
+          <div class="eq-math">\( y = y_{max}\,\dfrac{\ln\!\left(1+\mu\dfrac{|x|}{x_{max}}\right)}{\ln(1+\mu)}\cdot\text{sgn}(x) \)</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== 9. DIGITAL MOD ===== -->
+<div class="section" id="s9">
+  <div class="section-header"><div class="section-num">9</div><h2>DIGITAL MODULATION — ASK / PSK / FSK</h2></div>
+  <div class="section-body">
+
+    <div class="subsection">
+      <h3>General Formulas</h3>
+      <div class="eq-grid">
+        <div class="eq-card">
+          <div class="eq-label">Symbol Duration</div>
+          <div class="eq-math">\( T = \dfrac{1}{R_b} \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Avg Energy per Bit</div>
+          <div class="eq-math">\( E_b = \dfrac{E_1+E_2}{2} \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Threshold (Matched Filter)</div>
+          <div class="eq-math">\( \lambda = \dfrac{1}{2}(E_1 - E_2) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Antipodal Signals \([s_1=-s_2]\)</div>
+          <div class="eq-math">\( \lambda = 0 \)</div>
+        </div>
+        <div class="eq-card highlight">
+          <div class="eq-label">General Probability of Error</div>
+          <div class="eq-math">\( P_b = Q\!\left(\sqrt{\dfrac{\displaystyle\int_0^T[s_1(t)-s_2(t)]^2\,dt}{2N_0}}\right) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Matched Filter</div>
+          <div class="eq-math">\( h(t) = s_1(T-t) - s_2(T-t) \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>BASK — Binary Amplitude Shift Keying</h3>
+      <div class="eq-grid">
+        <div class="eq-card">
+          <div class="eq-label">Signals</div>
+          <div class="eq-math">\( s_1(t)=A\cos(2\pi f_c t),\quad s_2(t)=0 \quad(0\leq t\leq T) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Energies</div>
+          <div class="eq-math">\( E_1 = \dfrac{A^2T}{2}, \quad E_2 = 0, \quad E_b = \dfrac{A^2T}{4} \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Threshold</div>
+          <div class="eq-math">\( \lambda = E_b \)</div>
+        </div>
+        <div class="eq-card important">
+          <div class="eq-label">Probability of Error</div>
+          <div class="eq-math">\( P_b = Q\!\left(\sqrt{\dfrac{E_b}{N_0}}\right) = Q\!\left(\sqrt{SNR}\right) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">BW (90% / 95%)</div>
+          <div class="eq-math">\( BW_{90\%}=R_b \qquad BW_{95\%}=2R_b \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>BPSK — Binary Phase Shift Keying</h3>
+      <div class="eq-grid">
+        <div class="eq-card">
+          <div class="eq-label">Signals (Antipodal)</div>
+          <div class="eq-math">\( s_1(t)=A\cos(2\pi f_c t),\quad s_2(t)=-A\cos(2\pi f_c t) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Energy</div>
+          <div class="eq-math">\( E_1 = E_2 = E_b = \dfrac{A^2 T}{2} \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Threshold</div>
+          <div class="eq-math">\( \lambda = 0 \)</div>
+        </div>
+        <div class="eq-card important">
+          <div class="eq-label">Probability of Error</div>
+          <div class="eq-math">\( P_b = Q\!\left(\sqrt{\dfrac{2E_b}{N_0}}\right) = Q\!\left(\sqrt{2\,SNR}\right) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">BW (90% / 95%)</div>
+          <div class="eq-math">\( BW_{90\%}=R_b \qquad BW_{95\%}=2R_b \)</div>
+        </div>
+      </div>
+      <div class="note-box">BPSK is <b>3 dB better</b> than BASK (half the \(N_0\) needed for same \(P_b\))</div>
+    </div>
+
+    <div class="subsection">
+      <h3>BFSK — Binary Frequency Shift Keying</h3>
+      <div class="eq-grid">
+        <div class="eq-card">
+          <div class="eq-label">Signals</div>
+          <div class="eq-math">\( s_1(t)=A\cos(2\pi f_1 t),\quad s_2(t)=A\cos(2\pi f_2 t) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Frequencies</div>
+          <div class="eq-math">\( f_1 = f_c + \Delta f, \quad f_2 = f_c - \Delta f \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Orthogonality Condition</div>
+          <div class="eq-math">\( \Delta f = \dfrac{m}{2T},\quad m\in\mathbb{Z}^+ \quad\Rightarrow\quad \int_0^T s_1 s_2\,dt = 0 \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Energy</div>
+          <div class="eq-math">\( E_1 = E_2 = E_b = \dfrac{A^2 T}{2},\quad \lambda=0 \)</div>
+        </div>
+        <div class="eq-card important">
+          <div class="eq-label">Probability of Error</div>
+          <div class="eq-math">\( P_b = Q\!\left(\sqrt{\dfrac{E_b}{N_0}}\right) \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">BW (90% / 95%)</div>
+          <div class="eq-math">\( BW_{90\%}=2R_b+2\Delta f \qquad BW_{95\%}=4R_b+2\Delta f \)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>SNR Relationship</h3>
+      <div class="eq-grid">
+        <div class="eq-card highlight">
+          <div class="eq-label">SNR Definition</div>
+          <div class="eq-math">\( SNR = \dfrac{E_b}{N_0} \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">From Pb = Q(C)</div>
+          <div class="eq-math">\( C = \sqrt{2\,SNR}\;\;(\text{BPSK})\quad\text{or}\quad C=\sqrt{SNR}\;\;(\text{BASK/BFSK}) \)</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== 10. LINE CODING ===== -->
+<div class="section" id="s10">
+  <div class="section-header"><div class="section-num">10</div><h2>LINE CODING</h2></div>
+  <div class="section-body">
+    <div class="table-wrap">
+      <table>
+        <tr><th>Type</th><th>BW (90%)</th><th>BW (95%)</th><th>DC Value</th><th>Synchronization</th></tr>
+        <tr><td><b>Unipolar NRZ</b></td><td>\(R_b\)</td><td>\(2R_b\)</td><td>Yes ❌</td><td>Poor ❌</td></tr>
+        <tr><td><b>Polar NRZ</b></td><td>\(R_b\)</td><td>\(2R_b\)</td><td>No ✓</td><td>Poor ❌</td></tr>
+        <tr><td><b>Polar RZ</b></td><td>\(2R_b\)</td><td>\(2R_b\)</td><td>No ✓</td><td>Perfect ✓</td></tr>
+        <tr><td><b>Manchester</b></td><td>\(2R_b\)</td><td>—</td><td>No ✓</td><td>Perfect ✓</td></tr>
+      </table>
+    </div>
+    <div class="note-box" style="margin-top:12px">
+      <b>Bit Rate:</b> \(R_b = 1/T\) &emsp;|&emsp;
+      <b>Encoding:</b> Natural Binary, Gray Coding (adjacent levels differ by 1 bit), Folded Binary (MSB = sign)
+    </div>
+  </div>
+</div>
+
+<!-- ===== 11. KEY IDENTITIES ===== -->
+<div class="section" id="s11">
+  <div class="section-header"><div class="section-num">11</div><h2>KEY MATHEMATICAL IDENTITIES</h2></div>
+  <div class="section-body">
+    <div class="subsection">
+      <h3>Trigonometric Products</h3>
+      <div class="eq-grid">
+        <div class="eq-card">
+          <div class="eq-label">cos × cos</div>
+          <div class="eq-math">\( \cos A\cos B = \tfrac{1}{2}\!\left[\cos(A-B)+\cos(A+B)\right] \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">sin × sin</div>
+          <div class="eq-math">\( \sin A\sin B = \tfrac{1}{2}\!\left[\cos(A-B)-\cos(A+B)\right] \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">cos × sin</div>
+          <div class="eq-math">\( \cos A\sin B = \tfrac{1}{2}\!\left[\sin(A+B)-\sin(A-B)\right] \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">cos² and sin²</div>
+          <div class="eq-math">\( \cos^2 x = \tfrac{1}{2}+\tfrac{1}{2}\cos(2x) \qquad \sin^2 x = \tfrac{1}{2}-\tfrac{1}{2}\cos(2x) \)</div>
+        </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <h3>Fourier Transforms</h3>
+      <div class="eq-grid">
+        <div class="eq-card">
+          <div class="eq-label">Cosine</div>
+          <div class="eq-math">\( \mathcal{F}\!\left\{\cos(2\pi f_0 t)\right\} = \tfrac{1}{2}\!\left[\delta(f-f_0)+\delta(f+f_0)\right] \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Sine</div>
+          <div class="eq-math">\( \mathcal{F}\!\left\{\sin(2\pi f_0 t)\right\} = \dfrac{1}{2j}\!\left[\delta(f-f_0)-\delta(f+f_0)\right] \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Sinc Function</div>
+          <div class="eq-math">\( \text{sinc}(x) = \dfrac{\sin(\pi x)}{\pi x} \)</div>
+        </div>
+        <div class="eq-card">
+          <div class="eq-label">Q-Function</div>
+          <div class="eq-math">\( Q(x) = \dfrac{1}{\sqrt{2\pi}}\int_x^{\infty} e^{-u^2/2}\,du \)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  Communication Systems Formula Sheet &nbsp;|&nbsp; Dr. Ashraf Alrimawi &nbsp;|&nbsp; 2025–2026 &nbsp;|&nbsp; Racer Shalabi
+</footer>
+
+</body>
+</html>
